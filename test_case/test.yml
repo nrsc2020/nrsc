@@ -1,0 +1,156 @@
+name: test
+version: "0.1"
+about: test wallet command line tool
+
+# AppSettings can be defined as a list and are **not** ascii case sensitive
+settings:
+    - ArgRequiredElseHelp
+
+args:
+    - verbose:
+        short: v
+        multiple: true
+        help: Sets the level of verbosity
+
+# All subcommands must be listed in the 'subcommand:' object, where the key to
+# the list is the name of the subcommand, and all settings for that command are
+# are part of a Hash object
+subcommands:
+    # The name of this subcommand will be 'subcmd' which can be accessed in your
+    # Rust code later
+    - wallets:
+        about: Create NUM wallets
+        args:
+            - n:
+                help: init [n] wallets with the mnemonic
+                takes_value: true
+                required: false
+    - raw_post:
+        about: post a raw joint from specified json file
+        args:
+            - genesis:
+                help: send genesis unit
+                short: g
+                long: genesis
+                required: false
+            - first_pay:
+                help: send first payment 
+                short: f
+                long: first_pay
+                required: false
+    - send:
+        about: Pay SDG to an address
+        args:
+            - continue:
+                help: continuously pay
+                short: c
+                long: continue
+                required: false
+                value_names:
+                    - NUM
+                takes_value: true
+            - pay:
+                help: pay <AMOUNT> SDG to wallets
+                short: p
+                long: pay
+                multiple: true
+                value_names:
+                    - AMOUNT
+                takes_value: true
+                required: false
+            - text:
+                help: encode a text message in the unit to send
+                short: t
+                long: text
+                takes_value: true
+                required: false
+
+    - pay:
+        about: payment test case
+        args:
+            - ADDRESS:
+                    help: pay SDG to the address
+                    takes_value: true
+                    required: true
+            - AMOUNT:
+                    help: pay AMOUNT SDGs to the address
+                    takes_value: true
+                    required: true
+            - ns:
+                    help: send non serial joints
+                    short: ns
+                    value_name: nonserial
+            - ds:
+                    help: send double spend joints
+                    short: ds
+                    value_name: doublespend
+            - sa:
+                    help: send the same joints
+                    short: sa
+                    value_name: samejoint
+
+    - genesis:
+        about: create genesis with [n] witnesses
+        args:
+            - n:
+                help: init [n] witness
+                takes_value: true
+                required: false
+    - balance:
+        about: Show the wallet balance
+        args:
+            - ADDRESS:
+                help: get balance with the ADDRESS
+                takes_value: true
+                required: false
+    - info:
+        about: Show the wallet info
+        args:
+            # wallet address
+            - ADDRESS:
+                help: get wallet info
+                takes_value: true
+                required: true
+    - init:
+            about: set a wallet that transfer to other wallets
+            args:
+                - MNEMONIC:
+                    help: set the wallet with the mnemonic
+                    takes_value: true
+                    required: false
+    - log:
+            about: Show the history of this wallet account
+            args:
+                - ADDRESS:
+                    help: must need wallet address
+                    takes_value: true
+                    required: true
+                - v:
+                    help: show details of specified history transaction
+                    short: v
+                    takes_value: true
+                    required: false
+                    value_name: INDEX
+                - u:
+                    help: information behind of the unit to be shown
+                    short: u
+                    takes_value: true
+                    required: false
+                    default_value: "20"
+                    value_name: UNIT
+                - n:
+                    help: the maximum of transactions to be shown
+                    short: n
+                    takes_value: true
+                    required: false
+                    default_value: "20"
+                    value_name: NUM
+    - show:
+        about: Show the joint and propeties
+        args:
+            - UNIT:
+                help: show the joint infos, include joint and properties
+                takes_value: true
+                required: true
+
+

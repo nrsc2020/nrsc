@@ -1,0 +1,23 @@
+[package]
+description = "nrsc wallet cli rust implmentation"
+name = "sdg"
+version = "0.1.0"
+authors = ["NRSC<nrsc@nrsc.cc>"]
+license = "MIT"
+
+[dependencies]
+nrsc = { path = ".."}
+nrsc_wallet_base = { path = "../wallet_base" }
+nrsc_object_base = { path = "../object_base" }
+clap = {version = "2", features = ["yaml"]}
+
+may = "0.3"
+log = "0.4"
+chrono = "0.4"
+failure = "0.1"
+env_logger = "0.6"
+
+serde = "1"
+serde_json = "1"
+serde_derive = "1"
+

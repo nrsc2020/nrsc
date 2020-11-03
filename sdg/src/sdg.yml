@@ -1,0 +1,186 @@
+name: sdg
+version: "0.1"
+about: sdg wallet command line tool
+
+# AppSettings can be defined as a list and are **not** ascii case sensitive
+settings:
+    - ArgRequiredElseHelp
+
+args:
+    - verbose:
+        short: v
+        multiple: true
+        help: Sets the level of verbosity
+
+# All subcommands must be listed in the 'subcommand:' object, where the key to
+# the list is the name of the subcommand, and all settings for that command are
+# are part of a Hash object
+subcommands:
+    # The name of this subcommand will be 'subcmd' which can be accessed in your
+    # Rust code later
+    - init:
+        about: Create a ttt wallet
+        args:
+            - MNEMONIC:
+                help: init the wallet with the mnemonic
+                takes_value: true
+                required: false
+    - raw_post:
+        about: post a raw joint from specified json file
+        args:
+            - JOINT_FILE:
+                 help: the json file must contains a valid joint
+                 takes_value: true
+                 required: true
+    - send:
+        about: Pay SDG to an address
+        args:
+            - pay:
+                help: pay <AMOUNT> SDG to <ADDRESS>
+                short: p
+                long: pay
+                multiple: true
+                value_names:
+                    - ADDRESS
+                    - AMOUNT
+                takes_value: true
+                required: false
+            - text:
+                help: encode a text message in the unit to send
+                short: t
+                long: text
+                takes_value: true
+                required: false
+                
+    - log:
+        about: Show the history of this wallet account
+        args:
+            - v:
+                help: show details of specified history transaction
+                short: v
+                takes_value: true
+                required: false
+                value_name: INDEX
+            - u:
+                help: information behind of the unit to be shown
+                short: u
+                takes_value: true
+                required: false
+                default_value: "20"
+                value_name: UNIT
+            - n:
+                help: the maximum of transactions to be shown
+                short: n
+                takes_value: true
+                required: false
+                default_value: "20"
+                value_name: NUM
+
+    - info:
+        about: Show the wallet info
+        args:
+            - j:
+                help: wallet info format to JSON
+                short: j
+                long: json
+
+    - net:
+        about: Show the hub net connections
+        args:
+            - info:
+                help: brief net connections numbers
+                short: i
+                long: info
+            - stats:
+                help: joints statistics of connections
+                short: s
+                long: stats
+
+    - balance:
+        about: Show the wallet balance
+
+    - dump:
+        about: dmup all units to a file and verify data
+        args:
+            - verbose:
+                help: show each mci total joints number
+                short: v
+            - FILE:
+                help: file to save the joints
+                takes_value: true
+                required: false
+    - unit:
+        about: Show information about unit
+        args:
+            - info:
+                help: show units statistics information
+                long: info
+                short: i
+            - free:
+                help: list current free joints
+                long: free
+                short: f
+            - lost:
+                help: list the missing joints
+                long: lost
+                short: o
+            - bad:
+                help: list the bad joints
+                long: bad
+                short: b
+            - temp-bad:
+                help: list the temp-bad joints
+                long: temp-bad
+                short: t
+            - mci:
+                help: list all the units of the specified mci
+                long: mci
+                short: m
+                required: false
+                value_name: NUM
+                takes_value: true
+                allow_hyphen_values: true
+            - level:
+                help: list all the units from <MIN_LEVEL> to [<MAX_LEVEL>]
+                long: level
+                short: l
+                required: false
+                value_name: LEVEL
+                min_values: 1
+                takes_value: true
+            - show:
+                help: show the specified unit detail
+                long: show
+                short: s
+                required: false
+                value_name: UNIT
+                takes_value: true
+            - children:
+                help: list all children of the specified unit
+                long: children
+                short: c
+                required: false
+                value_name: UNIT
+                takes_value: true
+            - text:
+                help: show unit text
+                long: text
+                short: d
+                required: false
+                value_name: UNIT
+                takes_value: true
+    - tps:
+        about: Show TPS info
+        
+    - watch:
+        about: add watch addresses, example 'watch -w address'
+        args:
+        - watch:
+                help: list watch address
+                long: watch
+                short: w
+                required: true
+                value_name: address
+                takes_value: true
+
+
