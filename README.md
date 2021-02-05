@@ -22,3 +22,5 @@ See [Docker quick start](https://github.com/nrsc2020/nrsc/docs/blob/master/start
 ### License
 
 NRSC is released under the terms of the LGPL-3.0 license. See [COPYING](COPYING) for more information or see https://opensource.org/licenses/LGPL-3.0
+
+66666
